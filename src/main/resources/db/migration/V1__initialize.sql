@@ -60,17 +60,17 @@ create table order_items (
 
 insert into categories (title)
 values
-'Food',
-'Fashion',
-'Auto',
-'Culture events',
-'Electronics',
-'Home appliances',
-'Sports',
-'Healthcare',
-'Beauty',
-'Jewelry',
-'Toys';
+'Пищевые продукты',
+'Мода',
+'Автомобильные товары',
+'Мероприятия в сфере культуры',
+'Электроника',
+'Бытовая техника',
+'Товары для спорта',
+'Здоровье',
+'Красота',
+'Ювелирные изделия',
+'Игрушки';
 
 insert into products (title, price, category_id)
 values
