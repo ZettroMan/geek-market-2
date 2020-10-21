@@ -6,6 +6,18 @@
             <input class="form-control" type="text" ng-model="filter.title" id="filterTitle">
         </div>
         <div class="form-group col-md-6">
+            <label for="filterCategory">Категория</label>
+            <select name="filterCategory" id="filterCategory" ng-model="filter.category" onchange="fillTable()">
+                <option selected="selected" value="">Все категории</option>
+                <option ng-repeat="category in filter.categories" value="{{category.id}}">{{category.title}}</option>
+            </select>
+
+            <!--            <select class="form-control" ng-model="filter.category" id="filterCategory">-->
+            <!--                <option ng-repeat="с in categories">{{c.title}}</option>-->
+            <!--            </select>-->
+            <!--            <p ng-repeat="c in Categories">{{c.title}}</p>-->
+        </div>
+        <div class="form-group col-md-6">
             <label for="filterMinPrice">Минимальная цена</label>
             <input class="form-control" type="number" ng-model="filter.min_price" id="filterMinPrice">
         </div>
@@ -22,6 +34,7 @@
     <table class="table table-hover" cellpadding="0" cellspacing="0">
         <tr>
             <td>Название</td>
+            <td>Категория</td>
             <td>Цена</td>
             <td></td>
         </tr>
@@ -29,6 +42,7 @@
 
         <tr ng-repeat="p in ProductsPage.content">
             <td>{{p.title}}</td>
+            <td>{{p.category.title}}</td>
             <td>{{p.price}}</td>
             <td>
                 <button class="btn btn-success" ng-click="addToCart(p.id)">Добавить в корзину</button>

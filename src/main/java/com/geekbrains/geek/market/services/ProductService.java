@@ -1,6 +1,7 @@
 package com.geekbrains.geek.market.services;
 
 import com.geekbrains.geek.market.entities.Product;
+import com.geekbrains.geek.market.repositories.CategoryRepository;
 import com.geekbrains.geek.market.repositories.ProductRepository;
 import com.geekbrains.geek.market.repositories.specifications.ProductSpecifications;
 import com.geekbrains.geek.market.utils.ProductFilter;
