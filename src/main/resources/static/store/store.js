@@ -42,13 +42,24 @@ angular.module('app').controller('storeController', function ($scope, $http) {
             });
     }
 
-    $scope.generatePagesInd = function(startPage, endPage) {
+    $scope.generatePagesInd = function (startPage, endPage) {
         let arr = [];
         for (let i = startPage; i < endPage + 1; i++) {
             arr.push(i);
         }
         return arr;
     }
+
+    $scope.resetFilter = function () {
+        $scope.filter.title = null;
+        $scope.filter.category = null;
+        $scope.filter.min_price = null;
+        $scope.filter.max_price = null;
+        $scope.filterForm.$setPristine();
+        $scope.filterForm.$setUtouched();
+        $scope.fillTable();
+    };
+
 
     $scope.fillCategories();
     $scope.fillTable();

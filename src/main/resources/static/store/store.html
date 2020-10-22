@@ -1,7 +1,7 @@
 <div>
     <hr>
     <h3 style="margin-top: 15px">Фильтр</h3>
-    <form style="display: flex; flex-flow: row wrap" novalidate ng-submit="fillTable()">
+    <form style="display: flex; flex-flow: row wrap" novalidate ng-submit="fillTable()" name="filterForm">
         <div style="min-width: 300px" class="form-group col-md-6">
             <input style="margin-bottom: 10px" class="form-control" type="text" ng-model="filter.title" id="filterTitle"
                    placeholder="Название">
@@ -21,6 +21,7 @@
                    placeholder="Максимальная цена">
         </div>
         <button class="btn btn-success" type="submit">Применить</button>
+        <button style="margin-left: 10px" class="btn btn-secondary" ng-click="resetFilter()">Сбросить фильтр</button>
     </form>
     <hr>
     <h3>Товары</h3>
