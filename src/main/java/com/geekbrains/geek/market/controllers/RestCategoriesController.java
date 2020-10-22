@@ -1,17 +1,13 @@
 package com.geekbrains.geek.market.controllers;
 
 import com.geekbrains.geek.market.entities.Category;
-import com.geekbrains.geek.market.entities.Product;
-import com.geekbrains.geek.market.exceptions.ResourceNotFoundException;
 import com.geekbrains.geek.market.services.CategoryService;
-import com.geekbrains.geek.market.services.ProductService;
-import com.geekbrains.geek.market.utils.ProductFilter;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/categories")

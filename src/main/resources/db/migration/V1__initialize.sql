@@ -31,7 +31,7 @@ values
 insert into users_roles (user_id, role_id) values (1, 1), (1, 2);
 
 create table categories (
-    id                      bigserial primary key,
+    id                      serial primary key,
     title                   varchar(255)
 );
 
@@ -39,7 +39,7 @@ create table products (
     id                      bigserial primary key,
     title                   varchar(255),
     price                   int,
-    category_id             bigint references categories(id)
+    category_id             int references categories(id)
 );
 
 create table orders (

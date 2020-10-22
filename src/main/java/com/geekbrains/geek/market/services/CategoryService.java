@@ -1,7 +1,6 @@
 package com.geekbrains.geek.market.services;
 
 import com.geekbrains.geek.market.entities.Category;
-import com.geekbrains.geek.market.entities.Product;
 import com.geekbrains.geek.market.repositories.CategoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,11 +18,11 @@ public class CategoryService {
     }
 
     // дополнительные методы (пока не используются)
-    public Optional<Category> findById(Long id) {
+    public Optional<Category> findById(Integer id) {
         return categoryRepository.findById(id);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         categoryRepository.deleteById(id);
     }
 
@@ -34,6 +33,5 @@ public class CategoryService {
     public Category saveOrUpdate(Category category) {
         return categoryRepository.save(category);
     }
-
 
 }

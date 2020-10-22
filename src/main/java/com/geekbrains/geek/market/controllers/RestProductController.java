@@ -6,10 +6,8 @@ import com.geekbrains.geek.market.services.ProductService;
 import com.geekbrains.geek.market.utils.ProductFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
