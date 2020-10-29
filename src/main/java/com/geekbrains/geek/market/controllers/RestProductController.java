@@ -6,10 +6,8 @@ import com.geekbrains.geek.market.services.ProductService;
 import com.geekbrains.geek.market.utils.ProductFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,8 +23,7 @@ public class RestProductController {
             page = 1;
         }
         ProductFilter productFilter = new ProductFilter(params);
-        Page<Product> content = productService.findAll(productFilter.getSpec(), page - 1, 5);
-        return content;
+        return productService.findAll(productFilter.getSpec(), page - 1, 10);
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")

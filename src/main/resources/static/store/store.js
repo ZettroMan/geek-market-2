@@ -7,6 +7,7 @@ angular.module('app').controller('storeController', function ($scope, $http) {
             method: 'GET',
             params: {
                 title: $scope.filter ? $scope.filter.title : null,
+                category: $scope.filter ? $scope.filter.category : null,
                 min_price: $scope.filter ? $scope.filter.min_price : null,
                 max_price: $scope.filter ? $scope.filter.max_price : null,
                 p: pageIndex
@@ -15,6 +16,19 @@ angular.module('app').controller('storeController', function ($scope, $http) {
             .then(function (response) {
                 $scope.ProductsPage = response.data;
                 $scope.PaginationArray = $scope.generatePagesInd(1, $scope.ProductsPage.totalPages);
+            });
+    };
+
+    $scope.fillCategories = function () {
+        $http({
+            url: contextPath + '/api/v1/categories',
+            method: 'GET'
+        })
+            .then(function (response) {
+                $scope.filter = {
+                    category: null,
+                    categories: response.data
+                }
             });
     };
 
@@ -28,7 +42,7 @@ angular.module('app').controller('storeController', function ($scope, $http) {
             });
     }
 
-    $scope.generatePagesInd = function(startPage, endPage) {
+    $scope.generatePagesInd = function (startPage, endPage) {
         let arr = [];
         for (let i = startPage; i < endPage + 1; i++) {
             arr.push(i);
@@ -36,5 +50,17 @@ angular.module('app').controller('storeController', function ($scope, $http) {
         return arr;
     }
 
+    $scope.resetFilter = function () {
+        $scope.filter.title = null;
+        $scope.filter.category = null;
+        $scope.filter.min_price = null;
+        $scope.filter.max_price = null;
+        $scope.filterForm.$setPristine();
+        $scope.filterForm.$setUtouched();
+        $scope.fillTable();
+    };
+
+
+    $scope.fillCategories();
     $scope.fillTable();
 });

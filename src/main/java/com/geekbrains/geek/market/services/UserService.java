@@ -5,7 +5,6 @@ import com.geekbrains.geek.market.entities.Role;
 import com.geekbrains.geek.market.entities.User;
 import com.geekbrains.geek.market.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

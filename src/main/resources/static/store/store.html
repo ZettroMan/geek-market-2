@@ -1,27 +1,34 @@
 <div>
-    <h3>Фильтр</h3>
-    <form novalidate ng-submit="fillTable()">
-        <div class="form-group col-md-6">
-            <label for="filterTitle">Название</label>
-            <input class="form-control" type="text" ng-model="filter.title" id="filterTitle">
+    <hr>
+    <h3 style="margin-top: 15px">Фильтр</h3>
+    <form style="display: flex; flex-flow: row wrap" novalidate ng-submit="fillTable()" name="filterForm">
+        <div style="min-width: 300px" class="form-group col-md-6">
+            <input style="margin-bottom: 10px" class="form-control" type="text" ng-model="filter.title" id="filterTitle"
+                   placeholder="Название">
+            <label for="filterCategory">Категория</label>
+            <select style="margin-bottom: 10px" name="filterCategory" id="filterCategory" ng-model="filter.category"
+                    ng-change="fillTable()">
+                <option selected="selected" value="">Все категории</option>
+                <option ng-repeat="category in filter.categories" value="{{category.id}}">{{category.title}}</option>
+            </select>
         </div>
-        <div class="form-group col-md-6">
-            <label for="filterMinPrice">Минимальная цена</label>
-            <input class="form-control" type="number" ng-model="filter.min_price" id="filterMinPrice">
+        <div style="min-width: 300px" class="form-group col-md-6">
+            <input style="margin-bottom: 10px" class="form-control" type="number" ng-model="filter.min_price"
+                   id="filterMinPrice"
+                   placeholder="Минимальная цена">
+            <input style="margin-bottom: 10px" class="form-control" type="number" ng-model="filter.max_price"
+                   id="filterMaxPrice"
+                   placeholder="Максимальная цена">
         </div>
-        <div class="form-group col-md-6">
-            <label for="filterMaxPrice">Максимальная цена</label>
-            <input class="form-control" type="number" ng-model="filter.max_price" id="filterMaxPrice">
-        </div>
-        <div>
-            <button class="btn btn-success" type="submit">Применить</button>
-        </div>
+        <button class="btn btn-success" type="submit">Применить</button>
+        <button style="margin-left: 10px" class="btn btn-secondary" ng-click="resetFilter()">Сбросить фильтр</button>
     </form>
-
+    <hr>
     <h3>Товары</h3>
     <table class="table table-hover" cellpadding="0" cellspacing="0">
         <tr>
             <td>Название</td>
+            <td>Категория</td>
             <td>Цена</td>
             <td></td>
         </tr>
@@ -29,6 +36,7 @@
 
         <tr ng-repeat="p in ProductsPage.content">
             <td>{{p.title}}</td>
+            <td>{{p.category.title}}</td>
             <td>{{p.price}}</td>
             <td>
                 <button class="btn btn-success" ng-click="addToCart(p.id)">Добавить в корзину</button>

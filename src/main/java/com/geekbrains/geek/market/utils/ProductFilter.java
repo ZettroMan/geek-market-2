@@ -22,6 +22,12 @@ public class ProductFilter {
             filterDefinitionBuilder.append("&title=").append(filterTitle);
         }
 
+        if (params.containsKey("category") && !params.get("category").isBlank()) {
+            Integer categoryId = Integer.parseInt(params.get("category"));
+            spec = spec.and(ProductSpecifications.categoryIdEquals(categoryId));
+            filterDefinitionBuilder.append("&category=").append(categoryId);
+        }
+
         if (params.containsKey("min_price") && !params.get("min_price").isBlank()) {
             Integer minPrice = Integer.parseInt(params.get("min_price"));
             spec = spec.and(ProductSpecifications.priceGreaterOrEqualsThan(minPrice));
