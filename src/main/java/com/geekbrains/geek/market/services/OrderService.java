@@ -1,5 +1,6 @@
 package com.geekbrains.geek.market.services;
 
+import com.geekbrains.geek.market.dto.OrderDto;
 import com.geekbrains.geek.market.entities.Order;
 import com.geekbrains.geek.market.entities.Product;
 import com.geekbrains.geek.market.repositories.OrderRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,11 +22,11 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Optional<Order> findById(Long id) {
-        return orderRepository.findById(id);
+    public List<OrderDto> findAllUserOrdersDtosByUsername(String username) {
+        return orderRepository.findAllOrdersByUsername(username).stream().map(OrderDto::new).collect(Collectors.toList());
     }
 
-    public Order saveOrUpdate(Order o) {
-        return orderRepository.save(o);
+    public Order save(Order order) {
+        return orderRepository.save(order);
     }
 }

@@ -1,9 +1,7 @@
 package com.geekbrains.geek.market.controllers;
 
-import com.geekbrains.geek.market.configs.JwtTokenUtil;
-import com.geekbrains.geek.market.dto.JwtResponse;
+import com.geekbrains.geek.market.dto.OrderDto;
 import com.geekbrains.geek.market.entities.Order;
-import com.geekbrains.geek.market.entities.Product;
 import com.geekbrains.geek.market.entities.User;
 import com.geekbrains.geek.market.exceptions.ResourceNotFoundException;
 import com.geekbrains.geek.market.services.OrderService;
@@ -13,8 +11,7 @@ import com.geekbrains.geek.market.utils.Cart;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,27 +23,21 @@ import java.util.List;
 @RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor
 public class OrderController {
-    private final OrderService orderService;
     private final UserService userService;
+    private final OrderService orderService;
     private final Cart cart;
 
-    @GetMapping(produces = "application/json")
-    public List<Order> showOrders() {
-        return orderService.findAll();
+    @GetMapping
+    public List<OrderDto> getAllOrders(Principal principal) {
+        return orderService.findAllUserOrdersDtosByUsername(principal.getName());
     }
 
-    @GetMapping(value = "/{id}", produces = "application/json")
-    public Order getOrderById(@PathVariable Long id) {
-        return orderService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Unable to find order with id: " + id));
-    }
-
-    @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> createOrder(@RequestBody String address) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userService.findByUsername(username);
-        Order newOrder = new Order(user, cart, address);
-        newOrder.setId(null);
-        orderService.saveOrUpdate(newOrder);
-        return ResponseEntity.ok("Order created");
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createNewOrder(Principal principal, @RequestParam String address) {
+        User user = userService.findByUsername(principal.getName()).orElseThrow(() -> new ResourceNotFoundException("Unable to create order for user: " + principal.getName() + ". User doesn't exist"));
+        Order order = new Order(user, cart, address);
+        orderService.save(order);
+        cart.clear();
     }
 }
