@@ -42,5 +42,19 @@ angular.module('app').controller('cartController', function ($scope, $http) {
             });
     };
 
+    $scope.isCartEmpty = function () {
+        return $scope.cart.items.length == 0;
+    };
+
+    $scope.makeOrder = function () {
+        $http.post(contextPath + '/api/v1/orders', $scope.deliveryAddress)
+            .then(function (response) {
+                $scope.cart = null;
+                $scope.deliveryAddress = null;
+                console.log(response.data);
+                $window.location.href = '/store';
+            });
+    };
+
     $scope.cartContentRequest();
 });
