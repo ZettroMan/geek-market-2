@@ -47,12 +47,11 @@ angular.module('app').controller('cartController', function ($scope, $http) {
             url: contextPath + '/api/v1/orders',
             method: 'POST',
             params: {
-                address: $scope.ord ? $scope.ord.address : null
+                deliveryAddress: $scope.deliveryAddress
             }
-        })
-            .then(function (response) {
+        }).then(function (response) {
                 alert('Заказ оформлен');
-                $scope.cartContentRequest();
+                $location.path('/orders');    // хочу перейти на страницу с заказами - не получается
             });
     }
 

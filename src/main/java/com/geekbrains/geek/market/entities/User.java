@@ -1,9 +1,11 @@
 package com.geekbrains.geek.market.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,6 +24,10 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+    @OneToOne
+    @JoinColumn(name = "info_id")
+    private UserInfo userInfo;
 
     @ManyToMany
     @JoinTable(name = "users_roles",
