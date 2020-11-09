@@ -7,6 +7,7 @@ import com.geekbrains.geek.market.services.CategoryService;
 import com.geekbrains.geek.market.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -26,12 +27,8 @@ public class UserController {
     }
 
     @PutMapping
-    public void saveUserInfo(@RequestBody UserInfo userInfo, Principal principal) {
-        // Изменения в базе не сохраняются, не могу понять почему?
-        String username = principal.getName();
-        User user =  userService.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format("User '%s' not found", username)));
-        user.setUserInfo(userInfo);
-        userService.saveOrUpdate(user);
+    public void saveUserInfo(@RequestBody UserInfo userInfo) {
+        userService.saveUserInfo(userInfo);
     }
 
 }
