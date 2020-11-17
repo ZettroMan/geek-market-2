@@ -2,6 +2,7 @@ angular.module('app').controller('authController', function ($scope, $http, $loc
     const contextPath = 'http://localhost:8189/market';
 
     $scope.tryToAuth = function () {
+        console.log("tryToAuth");
         $http.post(contextPath + '/auth', $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {
@@ -36,6 +37,7 @@ angular.module('app').controller('authController', function ($scope, $http, $loc
 
     $scope.isUserLoggedIn = function () {
         if ($localStorage.currentUser) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
             return true;
         } else {
             return false;

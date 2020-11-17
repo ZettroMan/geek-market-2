@@ -3,6 +3,8 @@ package com.geekbrains.geek.market.services;
 
 import com.geekbrains.geek.market.entities.Role;
 import com.geekbrains.geek.market.entities.User;
+import com.geekbrains.geek.market.entities.UserInfo;
+import com.geekbrains.geek.market.repositories.UserInfoRepository;
 import com.geekbrains.geek.market.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final UserInfoRepository userInfoRepository;
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -37,5 +40,13 @@ public class UserService implements UserDetailsService {
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    public User saveOrUpdate(User user) {
+        return userRepository.save(user);
+    }
+
+    public UserInfo saveUserInfo(UserInfo userInfo) {
+        return userInfoRepository.save(userInfo);
     }
 }

@@ -28,15 +28,15 @@ public class OrderController {
     private final Cart cart;
 
     @GetMapping
-    public List<OrderDto> getAllOrders(Principal principal) {
-        return orderService.findAllUserOrdersDtosByUsername(principal.getName());
+    public List<OrderDto> getOrders(Principal principal) {
+        return orderService.findAllOrdersDtosByUsername(principal.getName());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createNewOrder(Principal principal, @RequestParam String address) {
+    public void createNewOrder(Principal principal, @RequestParam String deliveryAddress) {
         User user = userService.findByUsername(principal.getName()).orElseThrow(() -> new ResourceNotFoundException("Unable to create order for user: " + principal.getName() + ". User doesn't exist"));
-        Order order = new Order(user, cart, address);
+        Order order = new Order(user, cart, deliveryAddress);
         orderService.save(order);
         cart.clear();
     }
