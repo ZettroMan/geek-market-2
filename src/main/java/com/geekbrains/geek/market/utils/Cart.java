@@ -75,7 +75,7 @@ public class Cart {
         price = 0;
         for (OrderItem o : items) {
             o.setPricePerProduct(o.getProduct().getPrice());
-//            o.setPrice(o.getProduct().getPrice() * o.getQuantity());
+            o.setPrice(o.getProduct().getPrice() * o.getQuantity());
             price += o.getPrice();
         }
     }

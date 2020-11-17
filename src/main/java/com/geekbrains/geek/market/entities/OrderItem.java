@@ -32,11 +32,6 @@ public class OrderItem {
     @Column(name = "price")
     private int price;
 
-    public void setPricePerProduct(int pricePerProduct) {
-        this.pricePerProduct = pricePerProduct;
-        price = pricePerProduct * quantity;
-    }
-
     public OrderItem(Product p) {
         this.product = p;
         this.quantity = 1;
@@ -46,11 +41,9 @@ public class OrderItem {
 
     public void incrementQuantity() {
         quantity++;
-        price = pricePerProduct * quantity;
     }
 
     public void decrementQuantity() {
         quantity--;
-        price = pricePerProduct * quantity;
     }
 }

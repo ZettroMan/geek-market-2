@@ -22,7 +22,7 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public List<OrderDto> findAllOrdersDtosByUsername(String username) {
+    public List<OrderDto> findAllUserOrdersDtosByUsername(String username) {
         return orderRepository.findAllOrdersByUsername(username).stream().map(OrderDto::new).collect(Collectors.toList());
     }
 
