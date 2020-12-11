@@ -1,7 +1,6 @@
 package com.gb.zettro.market.controllers;
 
 import com.gb.zettro.market.dto.SystemUserDto;
-import com.gb.zettro.market.exceptions.MarketError;
 import com.gb.zettro.market.exceptions.RegistrationError;
 import com.gb.zettro.market.services.UserService;
 import lombok.RequiredArgsConstructor;

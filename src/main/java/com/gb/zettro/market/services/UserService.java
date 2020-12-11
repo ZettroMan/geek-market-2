@@ -5,8 +5,6 @@ import com.gb.zettro.market.dto.SystemUserDto;
 import com.gb.zettro.market.entities.Role;
 import com.gb.zettro.market.entities.User;
 import com.gb.zettro.market.repositories.UserRepository;
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,6 +25,7 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     private RoleService roleService;
     private PasswordEncoder passwordEncoder;
+    private ProfileService profileService;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -36,6 +35,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
+    }
+
+    @Autowired
+    public void setProfileService(ProfileService profileService) {
+        this.profileService = profileService;
     }
 
     @Autowired
@@ -68,6 +72,8 @@ public class UserService implements UserDetailsService {
         user.setEmail(systemUser.getEmail());
         user.setPassword(passwordEncoder.encode(systemUser.getPassword()));
         user.setRoles(Arrays.asList(roleService.getUserRole()));
-        return save(user);
+        save(user);
+        profileService.createEmptyProfileFor(user);
+        return user;
     }
 }
