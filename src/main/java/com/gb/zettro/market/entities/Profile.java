@@ -17,6 +17,27 @@ public class Profile {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "firstname")
+    private String firstname;
+
+    @Column(name = "secondname")
+    private String secondname;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "birthyear")
+    private Integer birthyear;
+
+    @Column(name = "sex")
+    private Character sex;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "hobbies")
     private String hobbies;
 }

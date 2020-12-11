@@ -5,6 +5,7 @@ import com.gb.zettro.market.entities.Product;
 import com.gb.zettro.market.exceptions.ResourceNotFoundException;
 import com.gb.zettro.market.services.ProductService;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import java.util.List;
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Data
+@Slf4j
 public class Cart {
     private final ProductService productService;
     private List<OrderItem> items;
@@ -29,6 +31,8 @@ public class Cart {
     }
 
     public void addOrIncrement(Long productId) {
+//        System.out.println("Adding product with id = " + productId);
+//        log.debug("Adding product with id = " + productId);
         for (OrderItem o : items) {
             if (o.getProduct().getId().equals(productId)) {
                 o.incrementQuantity();
@@ -37,7 +41,11 @@ public class Cart {
             }
         }
         Product p = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Unable to find product with id: " + productId + " (add to cart)"));
+//        System.out.println("Items length before = " + items.size());
+//        log.debug("Items length before = " + items.size());
         items.add(new OrderItem(p));
+//        System.out.println("Items length after = " + items.size());
+//        log.debug("Items length after = " + items.size());
         recalculate();
     }
 
@@ -72,7 +80,6 @@ public class Cart {
         price = 0;
         for (OrderItem o : items) {
             o.setPricePerProduct(o.getProduct().getPrice());
-            o.setPrice(o.getProduct().getPrice() * o.getQuantity());
             price += o.getPrice();
         }
     }

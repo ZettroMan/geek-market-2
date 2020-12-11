@@ -3,8 +3,41 @@
     <form novalidate ng-submit="submitUpdateProfile()">
         <input class="form-control" type="number" hidden ng-model="profile.id">
         <div class="form-group col-md-6">
-            <label for="elementUsername">Имя пользователя</label>
+            <label for="elementUsername">Никнейм:</label>
             <input ng-readonly="true" class="form-control" type="text" ng-model="profile.username" id="elementUsername">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="firstNameInput">Имя</label>
+            <input type="text" class="form-control" ng-model="profile.firstname" id="firstNameInput">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="secondNameInput">Фамилия</label>
+            <input type="text" class="form-control" ng-model="profile.secondname" id="secondNameInput">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="birthyearInput">Год рождения</label>
+            <input type="number" class="form-control" ng-model="profile.birthyear" id="birthyearInput">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="phoneInput">Телефон</label>
+            <input type="text" class="form-control" ng-model="profile.phone" id="phoneInput">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="cityInput">Город</label>
+            <input type="text" class="form-control" ng-model="profile.city" id="cityInput">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="addressInput">Адрес</label>
+            <input type="text" class="form-control" ng-model="profile.address" id="addressInput">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="sexInput">Пол</label>
+            <select  class="form-control" ng-model="profile.sex" id="sexInput">
+                <option>Не указан</option>
+                <option value='M'>Мужской</option>
+                <option value='F'>Женский</option>
+            </select>
         </div>
         <div class="form-group col-md-6">
             <label for="elementHobbies">Хобби</label>

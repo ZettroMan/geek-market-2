@@ -1,4 +1,4 @@
-angular.module('app').controller('cartController', function ($scope, $http) {
+angular.module('app').controller('cartController', function ($scope, $http, $location) {
     const contextPath = 'http://localhost:8189/market';
 
     $scope.cartContentRequest = function () {
@@ -47,14 +47,23 @@ angular.module('app').controller('cartController', function ($scope, $http) {
             url: contextPath + '/api/v1/orders',
             method: 'POST',
             params: {
-                address: $scope.ord ? $scope.ord.address : null
+                deliveryAddress: $scope.deliveryAddress
             }
         })
             .then(function (response) {
                 alert('Заказ оформлен');
                 $scope.cartContentRequest();
+                $location.path('/orders');
             });
     }
 
-    $scope.cartContentRequest();
+    $scope.loadProfile = function () {
+        $http.get(contextPath + '/api/v1/profile')
+            .then(function (response) {
+                $scope.profile = response.data;
+                $scope.cartContentRequest();
+            });
+    }
+
+    $scope.loadProfile();
 });
