@@ -36,6 +36,13 @@ public class ProfileController {
             return new ResponseEntity<>(new MarketError(HttpStatus.BAD_REQUEST.value(), "Incorrect password"), HttpStatus.BAD_REQUEST);
         }
         Profile p = profileService.findById(profileDto.getId()).orElseThrow(() -> new ResourceNotFoundException("Unable to find profile for current user"));
+        p.setFirstname(profileDto.getFirstname());
+        p.setSecondname(profileDto.getSecondname());
+        p.setBirthyear(profileDto.getBirthyear());
+        p.setPhone(profileDto.getPhone());
+        p.setCity(profileDto.getCity());
+        p.setAddress(profileDto.getAddress());
+        p.setSex(profileDto.getSex());
         p.setHobbies(profileDto.getHobbies());
         profileService.saveOrUpdate(p);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -1,6 +1,7 @@
 package com.gb.zettro.market.services;
 
 import com.gb.zettro.market.entities.Profile;
+import com.gb.zettro.market.entities.User;
 import com.gb.zettro.market.repositories.ProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,11 @@ public class ProfileService {
 
     public Profile saveOrUpdate(Profile profile) {
         return profileRepository.save(profile);
+    }
+
+    public void createEmptyProfileFor(User user) {
+        Profile profile = new Profile();
+        profile.setUser(user);
+        profileRepository.save(profile);
     }
 }

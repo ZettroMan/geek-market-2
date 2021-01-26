@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
     @Query("select p from Profile p where p.user.username = ?1")
     Optional<Profile> findByUsername(String username);
+
 }
