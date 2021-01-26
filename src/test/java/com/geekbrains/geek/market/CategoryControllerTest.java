@@ -1,7 +1,7 @@
 package com.geekbrains.geek.market;
 
-import com.geekbrains.geek.market.entities.Category;
-import com.geekbrains.geek.market.services.CategoryService;
+import com.gb.zettro.market.entities.Category;
+import com.gb.zettro.market.services.CategoryService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

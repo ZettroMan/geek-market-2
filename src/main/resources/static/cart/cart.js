@@ -60,7 +60,7 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
     $scope.loadProfile = function () {
         $http.get(contextPath + '/api/v1/profile')
             .then(function (response) {
-                $scope.profile = response.data;
+                $scope.deliveryAddress = response.data.address;
                 $scope.cartContentRequest();
             });
     }

@@ -1,8 +1,8 @@
 package com.geekbrains.geek.market;
 
-import com.geekbrains.geek.market.entities.Product;
-import com.geekbrains.geek.market.services.ProductService;
-import com.geekbrains.geek.market.utils.Cart;
+import com.gb.zettro.market.entities.Product;
+import com.gb.zettro.market.services.ProductService;
+import com.gb.zettro.market.utils.Cart;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

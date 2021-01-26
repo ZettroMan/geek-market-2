@@ -1,9 +1,8 @@
 package com.geekbrains.geek.market;
 
-import com.geekbrains.geek.market.entities.Category;
-import com.geekbrains.geek.market.entities.Product;
+import com.gb.zettro.market.entities.Category;
+import com.gb.zettro.market.entities.Product;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 
@@ -11,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @JsonTest
 public class JsonTests {
-    @Autowired
+
     private JacksonTester<Product> jackson;
 
     @Test
